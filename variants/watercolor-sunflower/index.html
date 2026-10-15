@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Type Garden</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+</style>
+</head>
+<body>
+<canvas id="garden" aria-label="TEXT HERE"></canvas>
+<script src="typegarden.js"></script>
+<script>
+  // ───────────── CONFIG — edit this block only ─────────────
+  const CONFIG = {
+    text: 'sunny',
+    font: 'Bookman',
+    fontUrl: 'fonts/URWBookman-Demi.otf',
+    weight: 600,
+    bloom: 'sunflower',
+    style: 'watercolor',
+    palette: {
+      bg:     '#f7f0dc',   // warm cream paper
+      text:   '#2f2a55',   // deep indigo ink
+      stem:   '#3e7a3c',
+      leaf:   '#5f9a4a',
+      bloom:  '#e9a516',   // golden ray petals
+      bloom2: '#f4c43a',   // lighter yellow, blended petal by petal
+      line:   '#9a5b14',   // seed-spiral / ray midribs
+      center: '#5b3416',   // dark brown disc
+    },
+    seed: 11,
+    density: 1,
+    bloomChance: 0.6,
+    bloomScale: 1.15,
+    blooms: {
+      sunflower(P, x, y, R, rot, e, a, C, o) {
+        const TAU = Math.PI * 2, c = Math.cos(rot), s = Math.sin(rot);
+        const T = (u, v) => [x + (u * c - v * s) * R, y + (u * s + v * c) * R];
+        const sp = (t) => (o.calm ? 1 - Math.exp(-t * 6) : 1 - Math.exp(-t * 6) * Math.cos(t * 11));
+        const ray = (th, r0, r1, w, col) => {   // teardrop ray petal, pointing outward at angle th
+          const ct = Math.cos(th), st = Math.sin(th), pts = [];
+          for (let i = 0; i <= 10; i++) { const u = i / 10, hw = w * Math.sin(Math.PI * Math.pow(u, 0.7)), r = r0 + (r1 - r0) * u; pts.push([ct * r - st * hw, st * r + ct * hw]); }
+          for (let i = 10; i >= 0; i--) { const u = i / 10, hw = w * Math.sin(Math.PI * Math.pow(u, 0.7)), r = r0 + (r1 - r0) * u; pts.push([ct * r + st * hw, st * r - ct * hw]); }
+          return pts;
+        };
+        const N = 16, mix = (i) => (i % 2 ? C.bloom : C.bloom2);
+        for (let ring = 0; ring < 2; ring++) {     // back ring first, front ring offset half a step
+          for (let i = 0; i < N; i++) {
+            const t = (a - (ring * 8 + i) * 28) / 1000;
+            if (t <= 0) continue;
+            const g = Math.max(0.001, sp(t)), th = ((i + ring * 0.5) / N) * TAU + e.ph1 * 0.1 + Math.sin(e.ph2 + i) * 0.05;
+            const r1 = (ring ? 0.82 : 1.0) * g * (0.92 + 0.12 * Math.sin(e.ph1 + i * 2.1));
+            P.fill(ray(th, 0.3, 0.3 + (r1 - 0.3) * 1, 0.17 * (ring ? 0.85 : 1)).map((p) => T(p[0], p[1])), ring ? mix(i + 1) : mix(i));
+          }
+        }
+        const fr = Math.max(0, Math.min(1, (a - 16 * 28 - 120) / 380));
+        if (fr > 0) {
+          const disc = []; for (let i = 0; i < 28; i++) { const th = (i / 28) * TAU, r = 0.4 * fr * (1 + 0.04 * Math.sin(th * 3 + e.ph2)); disc.push(T(Math.cos(th) * r, Math.sin(th) * r)); }
+          P.fill(disc, C.center);
+          if (R > 12) {                            // seed spiral (golden angle)
+            const n = Math.min(26, Math.floor(R * 0.9));
+            for (let k = 1; k <= n; k++) {
+              const r = 0.36 * Math.sqrt(k / n) * fr, th = k * 2.39996 + e.ph1, d = 0.035 + 0.02 * (k / n), q = [];
+              for (let j = 0; j < 6; j++) q.push(T(Math.cos(th) * r + Math.cos(j / 6 * TAU) * d, Math.sin(th) * r + Math.sin(j / 6 * TAU) * d));
+              P.fill(q, k % 3 ? C.line : C.bloom);
+            }
+          }
+        }
+      },
+    },
+  };
+  // ──────────────────────────────────────────────────────
+  if (new URLSearchParams(location.search).has('type')) { CONFIG.mode = 'type'; }   // ?type → keyboard mode
+  document.title = CONFIG.text + ' — type garden';
+  document.getElementById('garden').setAttribute('aria-label', CONFIG.text);
+  document.body.style.background = CONFIG.palette.bg;
+  TypeGarden.mount(document.getElementById('garden'), CONFIG);
+</script>
+</body>
+</html>

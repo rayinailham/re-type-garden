@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><link rel="stylesheet" href="../assets/base.css" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/base.css" />
+      <style>#s5 { position: absolute; inset: 0; }</style>
+      <div id="s5" data-composition-id="s5" data-width="1080" data-height="1080">
+        <div class="scene s5">
+        <p class="k mono" id="s5-a">Original design &amp; code</p>
+        <p class="who serif" id="s5-b">Akshat Agarwal</p>
+        <p class="meta mono" id="s5-c">Type Garden · x.com/art_akshat</p>
+        <div class="gap"></div>
+        <p class="k mono" id="s5-d">Reverse-engineered rebuild</p>
+        <p class="who serif r" id="s5-e">Rayina Ilham</p>
+        <p class="nc mono" id="s5-f">Non-commercial portfolio showcase. All credit for the idea, design and algorithm belongs to the original author.</p>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          const E = "power3.out";
+          tl.fromTo(["#s5-a", "#s5-b", "#s5-c", "#s5-d", "#s5-e", "#s5-f"], { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.55, ease: E, stagger: 0.18 }, 0.2);
+          window.__timelines["s5"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

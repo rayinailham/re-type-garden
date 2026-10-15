@@ -1,0 +1,59 @@
+{
+  "target": "https://type-garden.vercel.app/",
+  "recon_at": "2026-10-13",
+  "author": "Akshat Agarwal (https://x.com/art_akshat)",
+  "robots": { "allowed": true, "robots_txt": "404", "crawl_delay": null, "disallow": [] },
+  "sitemap": null,
+  "routes": ["/"],
+  "render_mode": "js_required",
+  "render_notes": "Claude Design bundler export: gzip+base64 asset manifest unpacked client-side into blob: URLs; app = single dc-runtime component drawing to Canvas 2D.",
+  "stack": {
+    "hosting": "Vercel static (sin1, cache HIT, HSTS preload)",
+    "runtime": "dc-runtime (Claude Design) + React 18.3.1 + ReactDOM 18.3.1 (inlined UMD)",
+    "render": "Canvas 2D, custom rAF loop",
+    "animation_libs": [],
+    "realtime": "@supabase/supabase-js 2.117.2 (lazy /vendor-supabase.js)",
+    "analytics": "Vercel Web Analytics",
+    "fonts": ["DM Mono 400/500", "Playfair Display 700", "GT Ultra (commercial, OTF subset)"]
+  },
+  "api": {
+    "rest": [],
+    "static_fetch": [
+      { "url": "/source.txt", "when": "load", "purpose": "Copy code clipboard (author brief + source)" },
+      { "url": "/glyphs.json", "when": "+1500ms", "purpose": "glyph outlines for SVG export" },
+      { "url": "/vendor-supabase.js", "when": "+1200ms", "purpose": "supabase-js UMD" },
+      { "url": "/_vercel/insights/script.js", "when": "load", "purpose": "analytics" }
+    ],
+    "websocket": {
+      "url": "wss://yrvohpmmrrlqirjjqnlr.supabase.co/realtime/v1/websocket?apikey=<publishable>&eventsPerSecond=20&vsn=2.0.0",
+      "channel": "realtime:garden",
+      "join_config": { "broadcast": { "self": false, "ack": false }, "presence": { "key": "<8-char id>", "enabled": true }, "private": false },
+      "presence_track": { "n": "flower name", "c": "#RRGGBB" },
+      "broadcast_events": {
+        "p": { "i": "string id", "x": "number 0..1", "y": "number 0..1", "h": "1 when hidden (no x/y)" },
+        "r": { "x": "number 0..1", "y": "number 0..1", "s": "int seed < 1e6" }
+      },
+      "send_interval_ms": "clamp(1000*N^2/40, 125, 10000)"
+    },
+    "works_without_browser": false
+  },
+  "query_flags": { "tgtest": "exposes window.__tg (component instance)", "tglocal": "BroadcastChannel transport instead of Supabase" },
+  "selectors": {
+    "app": "[data-tg=app]", "canvas": "[data-tg=app] > canvas", "input": "[data-tg=input]",
+    "modes": "[data-tg=modes] button", "hint_bar": "[data-tg=bar]", "gardener_count": "[data-tg=count]",
+    "swatches": "[data-tg=pal] button[data-tg=sw]", "export_png_svg": "[data-tg=ctrls] > button[data-tg=btn]",
+    "poster": "[data-tg=poster]", "poster_panel": "[data-tg=panel]", "poster_canvas": "[data-tg=pcanvas]",
+    "peers": "[data-tg=peers] .tg-peer", "copy_bar": "#tg-copy"
+  },
+  "pagination": null,
+  "auth": { "required": false },
+  "protection": { "cloudflare": false, "captcha": false, "rate_limit_observed": null, "notes": "public realtime channel, no auth" },
+  "evidence": {
+    "rea_capture": "ev_7f2a17003dcc151c5f02f5f6b4e31e10144362efc45703572dfa5e17c1276b62",
+    "hashes": "evidence/sha256.txt",
+    "screens": "evidence/screens/",
+    "source": "evidence/original-source.txt"
+  },
+  "recommended_engine": "n/a (not a scraping target; rebuild target)",
+  "notes": "Seluruh logika aplikasi tersedia sebagai source terbaca; tidak perlu deobfuscation. GT Ultra dan glyphs.json face 0 tidak boleh dipakai ulang."
+}

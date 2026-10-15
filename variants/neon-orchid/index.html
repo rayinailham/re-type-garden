@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Type Garden</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+</style>
+</head>
+<body>
+<canvas id="garden" aria-label="TEXT HERE"></canvas>
+<script src="typegarden.js"></script>
+<script>
+  // ───────────── CONFIG — edit this block only ─────────────
+  const CONFIG = {
+    text: 'nightbloom',
+    font: 'NimbusSansBold',
+    fontUrl: 'fonts/NimbusSans-Bold.otf',
+    weight: 700,
+    bloom: 'orchid',
+    style: 'neon',
+    palette: {
+      bg:    '#07030f',
+      text:  '#f6eeff',
+      stem:  '#18ffc2',   // cyan-green vine vs magenta/violet orchid
+      leaf:  '#2bd9ff',
+      bloom: '#ff2fd6',
+      bloom2:'#a66bff',
+      line:  '#ffd6fa',
+      center:'#ffe84a',
+    },
+    seed: 11,
+    density: 1,
+    bloomChance: 0.55,
+    bloomScale: 1.35,
+    leafShape: 'pointed',
+    blooms: {
+      // Phalaenopsis-style orchid: 3 narrow sepals, 2 broad round petals, small lip + column
+      orchid(P, x, y, R, rot, e, a, C, o) {
+        const { frame, eo, tone, teardrop, blob, place } = TypeGarden.util;
+        const T = frame(x, y, R, rot);
+        const open = (t, i, st) => TypeGarden.util.open(t, i, st, o, 8, 13);
+        const drop = (cx, cy, len, wid, ang) => teardrop(cx, cy, len, wid, ang, 14);
+        const oval = (cx, cy, rx, ry, ang, ph) => blob(cx, cy, rx, ry, ang, ph, 0.05, 2, 30);
+        const put = (poly, bx, by, s) => place(T, poly, s, bx, by);
+        const sep = [[0, -0.1, 0.95, 0.2, 0], [-0.1, 0.05, 0.9, 0.2, 2.2], [0.1, 0.05, 0.9, 0.2, -2.2]];
+        sep.forEach((q, i) => {
+          const s = open(a, i, 80); if (s <= 0.001) return;
+          P.fill(put(drop(q[0], q[1], q[2], q[3], q[4] + (1 - Math.min(1, s)) * 0.3), q[0], q[1], s), tone(C, i, 6));
+        });
+        [[-1, 3], [1, 4]].forEach(([sd, i]) => {
+          const s = open(a, i, 80); if (s <= 0.001) return;
+          const ang = sd * (-0.35 + 0.1 * Math.sin(e.ph1 + i));
+          P.fill(put(oval(sd * 0.5, -0.05, 0.58, 0.5, ang, e.ph1 + i), 0, 0.1, s), tone(C, i, 6));
+        });
+        const ls = open(a, 5, 80);
+        if (ls > 0.001) {
+          P.fill(put(drop(0, 0.02, 0.62, 0.2, Math.PI), 0, 0.02, ls), tone(C, 5, 6));
+          const fr = eo((a - 6 * 80) / 350);
+          if (fr > 0) {
+            P.fill(put(oval(0, 0.28, 0.1, 0.1, 0, e.ph2), 0, 0.28, fr), C.center || C.line);
+            const l1 = []; for (let i = 0; i <= 14; i++) l1.push(T(0, -0.35 + 0.7 * (i / 14) * fr));
+            if (R >= 8) P.stroke(l1, C.line, Math.max(0.8, R * 0.04));
+          }
+        }
+      },
+    },
+  };
+  // ──────────────────────────────────────────────────────
+  if (new URLSearchParams(location.search).has('type')) { CONFIG.mode = 'type'; }   // ?type → keyboard mode
+  document.title = CONFIG.text + ' — type garden';
+  document.getElementById('garden').setAttribute('aria-label', CONFIG.text);
+  document.body.style.background = CONFIG.palette.bg;
+  TypeGarden.mount(document.getElementById('garden'), CONFIG);
+</script>
+</body>
+</html>

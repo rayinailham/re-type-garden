@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1080" />
+    <title>RE: Type Garden — showcase</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/base.css" />
+    <style>#root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--fg); }</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="45" data-width="1080" data-height="1080">
+      <div id="bg-slot" data-composition-id="bg" data-composition-src="compositions/bg.html" data-start="0" data-duration="45" data-track-index="0" data-width="1080" data-height="1080"></div>
+      <div id="s1-slot" data-composition-id="s1" data-composition-src="compositions/s1.html" data-start="0" data-duration="4.5" data-track-index="1" data-width="1080" data-height="1080"></div>
+      <div id="s2-slot" data-composition-id="s2" data-composition-src="compositions/s2.html" data-start="4.5" data-duration="13" data-track-index="1" data-width="1080" data-height="1080"></div>
+      <div id="s3-slot" data-composition-id="s3" data-composition-src="compositions/s3.html" data-start="17.5" data-duration="11.5" data-track-index="1" data-width="1080" data-height="1080"></div>
+      <div id="s4-slot" data-composition-id="s4" data-composition-src="compositions/s4.html" data-start="29" data-duration="10.5" data-track-index="1" data-width="1080" data-height="1080"></div>
+      <div id="s5-slot" data-composition-id="s5" data-composition-src="compositions/s5.html" data-start="39.5" data-duration="5.5" data-track-index="1" data-width="1080" data-height="1080"></div>
+      <div id="wm-slot" data-composition-id="wm" data-composition-src="compositions/wm.html" data-start="4.5" data-duration="35" data-track-index="2" data-width="1080" data-height="1080"></div>
+    </div>
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+
+> re-type-garden@0.1.0 test
+> node ./node_modules/vitest/vitest.mjs run
+
+
+ RUN  v3.2.7 /home/rayin/Projects/RE:type-garden
+
+ ✓ tests/palettes.test.ts (4 tests) 4ms
+ ✓ tests/layout.test.ts (4 tests) 3ms
+ ✓ tests/export-zip.test.ts (5 tests) 3ms
+ ✓ tests/math.test.ts (7 tests) 33ms
+ ✓ tests/growth.test.ts (6 tests) 9ms
+ ✓ tests/input.test.ts (11 tests) 7ms
+ ✓ tests/engine.test.ts (11 tests) 10ms
+ ✓ tests/poster-export.test.ts (10 tests) 23ms
+ ✓ tests/live.test.ts (5 tests) 190ms
+
+ Test Files  9 passed (9)
+      Tests  63 passed (63)
+   Start at  19:48:14
+   Duration  554ms (transform 545ms, setup 0ms, collect 1.02s, tests 282ms, environment 2ms, prepare 584ms)
+
+EXIT 0

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Type Garden</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+</style>
+</head>
+<body>
+<canvas id="garden" aria-label="TEXT HERE"></canvas>
+<script src="typegarden.js"></script>
+<script>
+  // ───────────── CONFIG — edit this block only ─────────────
+  const CONFIG = {
+    text: 'sketch',
+    font: 'NimbusBoldItalic',                    // any name you like; it is registered from fontUrl
+    fontUrl: 'fonts/NimbusRoman-BoldItalic.otf',   // copied into the project — no CDN
+    weight: 700,
+    bloom: 'daisy',                    // rose | poppy | daisy | tulip | custom key of `blooms`
+    style: 'ink',                      // flat | ink | papercut | neon | watercolor | pixel
+    palette: {
+      bg:    '#f3ead3',
+      text:  '#111111',
+      stem:  '#2c4a7a',
+      bloom: '#0c0c0c',
+      // bloom2: '#ff7a5c',   // optional second tone
+      line:  '#2a2825',
+      center: '#111111',   // poppy / daisy centre
+    },
+    seed: 11,
+    density: 1.1,
+    bloomChance: 0.5,
+    bloomScale: 1.1,
+    // blooms: { mine(P, x, y, R, rot, e, a, C, o) { ... } },   // custom species, then bloom:'mine'
+  };
+  // ──────────────────────────────────────────────────────
+  if (new URLSearchParams(location.search).has('type')) { CONFIG.mode = 'type'; }   // ?type → keyboard mode
+  document.title = CONFIG.text + ' — type garden';
+  document.getElementById('garden').setAttribute('aria-label', CONFIG.text);
+  document.body.style.background = CONFIG.palette.bg;
+  TypeGarden.mount(document.getElementById('garden'), CONFIG);
+</script>
+</body>
+</html>

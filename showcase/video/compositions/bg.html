@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><link rel="stylesheet" href="../assets/base.css" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/base.css" />
+      <style>#bg { position: absolute; inset: 0; }</style>
+      <div id="bg" data-composition-id="bg" data-width="1080" data-height="1080">
+        <div id="glow"></div>
+        <div id="ghost" class="serif">type garden type garden</div>
+      </div>
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          const E = "power3.out";
+          tl.fromTo("#glow", { scale: 0.92, opacity: 0.7 }, { scale: 1.06, opacity: 1, duration: 9, ease: "sine.inOut", yoyo: true, repeat: 4 }, 0);
+          tl.fromTo("#ghost", { x: 0 }, { x: -380, duration: 45, ease: "none" }, 0);
+          window.__timelines["bg"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

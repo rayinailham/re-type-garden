@@ -1,0 +1,18 @@
+
+> re-type-garden@0.1.0 audit:leak
+> node ./tools/leak-audit.mjs
+
+PASS  uji gigit: gt-ultra tertangkap
+PASS  uji gigit: author-supabase-key tertangkap
+PASS  uji gigit: author-supabase-ref tertangkap
+PASS  uji gigit: abs-path tertangkap
+PASS  uji gigit: author-branding tertangkap
+PASS  uji gigit: supabase-bundle tertangkap
+PASS  uji gigit: komentar di src tidak false-positive
+PASS  uji gigit: di build, komentar tetap ditandai
+
+terpindai: src 35 berkas, build 26 berkas
+PASS  glyphs.json = hasil generate sendiri (faces=1, glyph=474)
+
+bersih: 0 temuan
+EXIT 0

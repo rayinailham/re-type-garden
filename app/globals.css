@@ -1,0 +1,269 @@
+@import "tailwindcss";
+
+/* UI chrome tokens (monokrom; warna taman datang dari palet via --tg-*).
+   Nilai dari artifacts/doc/tokens.json .color.ui + .radius. */
+@theme {
+  --color-ui-bg: #000000;
+  --color-ui-panel: #0a0a0a;
+  --color-ui-selected: #161616;
+  --color-ui-divider: #1e1e1e;
+  --color-ui-border: #2a2a2a;
+  --color-ui-border-strong: #3a3a3a;
+  --color-ui-muted: #8c8c8c;
+  --color-ui-btn-fg: #bdbdbd;
+  --color-ui-fg: #ededed;
+  --color-ui-white: #ffffff;
+  --color-ui-link-hover: #ffb4a8;
+
+  --radius-pill: 999px;
+  --radius-input: 10px;
+  --radius-card: 12px;
+  --radius-preview: 8px;
+
+  --font-ui: var(--font-dm-mono), ui-monospace, monospace;
+  --font-display: var(--font-playfair), Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+a {
+  color: #fff;
+}
+a:hover {
+  color: var(--color-ui-link-hover);
+}
+
+body {
+  /* latar awal = palet default (Rose noir). Diubah per-palet lewat --tg-bg. */
+  background: var(--tg-bg, #000000);
+  color: var(--tg-text, #ffffff);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior: none;
+}
+
+/* App shell: fixed fullscreen, kursor text (siap diketik). */
+[data-tg="app"] {
+  position: fixed;
+  inset: 0;
+  background: var(--tg-bg, #000000);
+  color: var(--tg-text, #ffffff);
+  cursor: text;
+  overflow: hidden;
+}
+
+[data-tg="app"] > canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* A1: hormati reduced-motion (perbaikan rebuild). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- Chrome type mode (port 1:1 dari <style> source; angka = 02-design-tokens) ---------- */
+[data-tg="app"] {
+  font-family: var(--font-ui);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+[data-tg="app"] button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+/* fokus terlihat di semua tombol (a11y); warna = teks palet agar selalu kontras terhadap latar */
+[data-tg="app"] button:focus-visible,
+[data-tg="app"] a:focus-visible {
+  outline: 2px solid var(--tg-text, #fff);
+  outline-offset: 2px;
+}
+html[data-touch] [data-tg="app"] {
+  touch-action: none;
+  top: var(--tg-top, 0px) !important;
+  bottom: auto !important;
+  height: var(--tg-h, 100%) !important;
+}
+[data-tg="modes"] {
+  top: calc(16px + env(safe-area-inset-top));
+  right: calc(16px + env(safe-area-inset-right));
+}
+[data-tg="bar"] {
+  left: calc(24px + env(safe-area-inset-left));
+  right: calc(24px + env(safe-area-inset-right));
+  bottom: calc(20px + env(safe-area-inset-bottom));
+}
+[data-tg="credit"] {
+  top: calc(16px + env(safe-area-inset-top));
+  left: calc(16px + env(safe-area-inset-left));
+}
+[data-tg="coarse"] {
+  display: none;
+}
+@media (pointer: coarse) {
+  [data-tg="fine"] {
+    display: none;
+  }
+  [data-tg="coarse"] {
+    display: inline;
+  }
+}
+[data-tg="count"]:empty {
+  display: none;
+}
+[data-tg="count"]::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  margin-right: 8px;
+  vertical-align: 1px;
+  animation: tg-live 2.4s ease-in-out infinite;
+}
+@keyframes tg-live {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* kursor peer (live) */
+.tg-peer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+  transition: opacity 0.45s;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+.tg-peer svg {
+  display: block;
+  overflow: visible;
+}
+.tg-peer span {
+  position: absolute;
+  left: 14px;
+  top: 18px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  color: #000;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  [data-tg="bar"] {
+    left: calc(16px + env(safe-area-inset-left));
+    right: calc(16px + env(safe-area-inset-right));
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    gap: 10px !important;
+  }
+  [data-tg="hints"] {
+    gap: 12px !important;
+    font-size: 11px;
+  }
+  [data-tg="ctrls"] {
+    flex: 1 1 100%;
+    justify-content: space-between;
+    gap: 8px !important;
+  }
+  [data-tg="pal"] {
+    gap: 4px !important;
+  }
+  [data-tg="sw"] {
+    --sw: clamp(13px, calc((100vw - 183px) / 10), 22px);
+    width: var(--sw) !important;
+    height: var(--sw) !important;
+  }
+  [data-tg="dot"] {
+    width: calc(var(--sw) * 0.46) !important;
+    height: calc(var(--sw) * 0.46) !important;
+  }
+  [data-tg="btn"] {
+    padding: 7px 11px !important;
+  }
+  .tg-peer {
+    font-size: 10px;
+  }
+  .tg-peer svg {
+    width: 15px;
+    height: 17px;
+  }
+  .tg-peer span {
+    left: 12px;
+    top: 15px;
+    padding: 3px 7px;
+  }
+}
+@media (max-width: 349px) {
+  [data-tg="modes"] button {
+    padding: 7px 10px !important;
+  }
+}
+
+/* ---------- Poster mode ≤720px: stage di atas, panel di bawah, header fade sticky ---------- */
+@media (max-width: 720px) {
+  [data-tg="poster"] {
+    display: flex !important;
+    flex-direction: column;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+  [data-tg="poster"]::before {
+    content: "";
+    order: -2;
+    position: sticky;
+    top: 0;
+    flex: none;
+    height: calc(60px + env(safe-area-inset-top));
+    margin-bottom: calc(-60px - env(safe-area-inset-top));
+    background: linear-gradient(#000 62%, rgba(0, 0, 0, 0));
+    z-index: 4;
+    pointer-events: none;
+  }
+  [data-tg="stage"] {
+    order: -1;
+    flex: none;
+    padding: calc(64px + env(safe-area-inset-top)) 16px 12px !important;
+  }
+  [data-tg="pcanvas"] {
+    width: 100% !important;
+    max-width: 520px;
+  }
+  [data-tg="panel"] {
+    flex: none;
+    border-right: 0 !important;
+    border-top: 1px solid #1e1e1e;
+    overflow: visible !important;
+    padding: 20px 16px calc(32px + env(safe-area-inset-bottom)) !important;
+  }
+}

@@ -1,0 +1,64 @@
+- generic [ref=e4]:
+  - textbox "Type to grow a garden"
+  - generic [ref=e6]:
+    - button "Type" [ref=e7] [cursor=pointer]
+    - button "Poster" [active] [ref=e8] [cursor=pointer]
+  - generic [ref=e55]:
+    - generic [ref=e56]:
+      - generic [ref=e57]: Poster
+      - generic [ref=e58]: 1:1 · 3s loop · 30 fps
+    - generic [ref=e59]:
+      - generic [ref=e60]: Words
+      - textbox [ref=e61]: in bloom
+      - button "Regrow garden" [ref=e62] [cursor=pointer]
+    - generic [ref=e63]:
+      - generic [ref=e64]: Motion
+      - generic [ref=e65]:
+        - button "Breathe Slow sway · 3s" [ref=e66] [cursor=pointer]:
+          - generic [ref=e67]: Breathe
+          - generic [ref=e68]: Slow sway · 3s
+        - button "Grow & wither Bloom, then back · 6s" [ref=e69] [cursor=pointer]:
+          - generic [ref=e70]: Grow & wither
+          - generic [ref=e71]: Bloom, then back · 6s
+        - button "Typed Type, cut, repeat · 5s" [ref=e72] [cursor=pointer]:
+          - generic [ref=e73]: Typed
+          - generic [ref=e74]: Type, cut, repeat · 5s
+        - button "Gust Wind sweeps through · 4s" [ref=e75] [cursor=pointer]:
+          - generic [ref=e76]: Gust
+          - generic [ref=e77]: Wind sweeps through · 4s
+        - button "Reach Stems follow a light · 6s" [ref=e78] [cursor=pointer]:
+          - generic [ref=e79]: Reach
+          - generic [ref=e80]: Stems follow a light · 6s
+        - button "Scatter Random bloom, fade · 6s" [ref=e81] [cursor=pointer]:
+          - generic [ref=e82]: Scatter
+          - generic [ref=e83]: Random bloom, fade · 6s
+        - button "Visitor Butterfly drops by · 7s" [ref=e84] [cursor=pointer]:
+          - generic [ref=e85]: Visitor
+          - generic [ref=e86]: Butterfly drops by · 7s
+    - generic [ref=e87]:
+      - generic [ref=e88]: Palette
+      - generic [ref=e89]:
+        - button "Rose noir" [ref=e90] [cursor=pointer]:
+          - generic [ref=e91]: Aa
+        - button "Paper" [ref=e96] [cursor=pointer]:
+          - generic [ref=e97]: Aa
+        - button "Midnight" [ref=e102] [cursor=pointer]:
+          - generic [ref=e103]: Aa
+        - button "Citrus" [ref=e108] [cursor=pointer]:
+          - generic [ref=e109]: Aa
+        - button "Orchid" [ref=e114] [cursor=pointer]:
+          - generic [ref=e115]: Aa
+        - button "Moss" [ref=e120] [cursor=pointer]:
+          - generic [ref=e121]: Aa
+        - button "Tomato" [ref=e126] [cursor=pointer]:
+          - generic [ref=e127]: Aa
+        - button "Butter" [ref=e132] [cursor=pointer]:
+          - generic [ref=e133]: Aa
+        - button "Blush" [ref=e138] [cursor=pointer]:
+          - generic [ref=e139]: Aa
+        - button "Mono" [ref=e144] [cursor=pointer]:
+          - generic [ref=e145]: Aa
+    - generic [ref=e150]:
+      - generic [ref=e151]: Export · 1080 × 1080 loop
+      - button "Export MP4 loop" [ref=e152] [cursor=pointer]
+      - button "PNG frames (.zip)" [ref=e153] [cursor=pointer]

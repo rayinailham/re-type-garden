@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Type Garden</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+</style>
+</head>
+<body>
+<canvas id="garden" aria-label="TEXT HERE"></canvas>
+<script src="typegarden.js"></script>
+<script>
+  // ───────────── CONFIG — edit this block only ─────────────
+  const CONFIG = {
+    text: 'poppy\nfield',
+    font: 'DejaVuSerifBold',
+    fontUrl: 'fonts/DejaVuSerif-Bold.ttf',
+    weight: 700,
+    bloom: 'poppy',
+    style: 'papercut',
+    palette: {
+      bg:    '#f4ead2',
+      text:  '#3b2a1e',
+      stem:  '#4f6b3a',
+      bloom: '#d9361f',
+      bloom2:'#a8200f',
+      line:  '#f4ead2',
+      center:'#1c1410',
+    },
+    seed: 5,
+    density: 1,
+    bloomChance: 0.5,
+    bloomScale: 1,
+  };
+  // ──────────────────────────────────────────────────────
+  if (new URLSearchParams(location.search).has('type')) { CONFIG.mode = 'type'; }   // ?type → keyboard mode
+  document.title = CONFIG.text + ' — type garden';
+  document.getElementById('garden').setAttribute('aria-label', CONFIG.text);
+  document.body.style.background = CONFIG.palette.bg;
+  TypeGarden.mount(document.getElementById('garden'), CONFIG);
+</script>
+</body>
+</html>

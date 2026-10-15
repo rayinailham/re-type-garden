@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>midnight — type garden</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+</style>
+</head>
+<body>
+<canvas id="garden" aria-label="midnight"></canvas>
+<script src="typegarden.js"></script>
+<script>
+  // ───────────── CONFIG — edit this block only ─────────────
+  const CONFIG = {
+    text: 'midnight',
+    font: 'Playfair',                    // any name you like; it is registered from fontUrl
+    fontUrl: 'fonts/PlayfairDisplay[wght].ttf',   // copied into the project — no CDN
+    weight: 700,
+    bloom: 'rose',                     // rose | poppy | daisy | tulip | custom key of `blooms`
+    style: 'flat',                     // flat | ink | papercut | neon | watercolor | pixel
+    palette: {
+      bg:    '#06070d',
+      text:  '#f1eee4',
+      stem:  '#3fae7c',
+      bloom: '#2f6bff',
+      bloom2: '#8fb8ff',   // optional second tone
+      line:  '#d6e4ff',
+      // center: '#222222',   // poppy / daisy centre
+    },
+    seed: 7,
+    density: 1,
+    bloomChance: 0.45,
+    bloomScale: 1,
+    // blooms: { mine(P, x, y, R, rot, e, a, C, o) { ... } },   // custom species, then bloom:'mine'
+  };
+  // ──────────────────────────────────────────────────────
+  if (new URLSearchParams(location.search).has('type')) { CONFIG.mode = 'type'; }   // ?type → keyboard mode
+  document.title = CONFIG.text + ' — type garden';
+  document.getElementById('garden').setAttribute('aria-label', CONFIG.text);
+  document.body.style.background = CONFIG.palette.bg;
+  TypeGarden.mount(document.getElementById('garden'), CONFIG);
+</script>
+</body>
+</html>

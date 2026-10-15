@@ -1,0 +1,23 @@
+{
+  "parity_frames": 49,
+  "parity_pass": 49,
+  "parity_worst_pct": 0.0,
+  "parity_threshold_pct": 1,
+  "unit_passed": 63,
+  "unit_total": 63,
+  "leak_findings": 0,
+  "leak_bite_tests": 8,
+  "qa_total": 27,
+  "qa_clean": 27,
+  "qa_engines": [
+    "chromium",
+    "firefox",
+    "webkit"
+  ],
+  "sources": [
+    "showcase/out/parity.log",
+    "showcase/out/unit.log",
+    "showcase/out/leak.log",
+    "tests/e2e/out/qa/results.json"
+  ]
+}

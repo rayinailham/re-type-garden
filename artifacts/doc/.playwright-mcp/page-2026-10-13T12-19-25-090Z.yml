@@ -1,0 +1,35 @@
+- generic [active] [ref=f1e1]:
+  - main [ref=f1e2]:
+    - 'heading "RE: Type Garden" [level=1] [ref=f1e3]'
+    - textbox "Type to grow a garden"
+    - status [ref=f1e5]
+    - generic:
+      - generic: "RE: Type Garden"
+      - generic:
+        - text: reverse-engineered by Rayina Ilham ·
+        - link "inspired by Type Garden by Akshat Agarwal" [ref=f1e6] [cursor=pointer]:
+          - /url: https://x.com/art_akshat
+    - group "Mode" [ref=f1e7]:
+      - button "Type" [pressed] [ref=f1e8] [cursor=pointer]
+      - button "Poster" [ref=f1e9] [cursor=pointer]
+    - generic [ref=f1e10]:
+      - generic [ref=f1e11]:
+        - generic [ref=f1e12]: type to grow
+        - generic [ref=f1e13]: space cuts
+        - generic [ref=f1e14]: backspace withers
+        - generic [ref=f1e15]: enter clears
+      - generic [ref=f1e16]:
+        - group "Palette" [ref=f1e17]:
+          - button "Rose noir" [pressed] [ref=f1e18] [cursor=pointer]
+          - button "Paper" [ref=f1e20] [cursor=pointer]
+          - button "Midnight" [ref=f1e22] [cursor=pointer]
+          - button "Citrus" [ref=f1e24] [cursor=pointer]
+          - button "Orchid" [ref=f1e26] [cursor=pointer]
+          - button "Moss" [ref=f1e28] [cursor=pointer]
+          - button "Tomato" [ref=f1e30] [cursor=pointer]
+          - button "Butter" [ref=f1e32] [cursor=pointer]
+          - button "Blush" [ref=f1e34] [cursor=pointer]
+          - button "Mono" [ref=f1e36] [cursor=pointer]
+        - button "PNG" [ref=f1e38] [cursor=pointer]
+        - button "SVG" [ref=f1e39] [cursor=pointer]
+  - alert [ref=f1e40]

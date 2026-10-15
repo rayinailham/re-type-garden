@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Type Garden variants</title>
+<style>
+  :root { --bg:#f5f1e8; --fg:#1d1a16; --mut:#6f675a; --card:#fffdf8; --line:#ddd5c3; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#14120f; --fg:#f1ece0; --mut:#9a917f; --card:#1d1a16; --line:#332e26; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.5 system-ui, sans-serif; }
+  header, main, footer { max-width:1280px; margin:0 auto; padding:0 16px; }
+  header { padding-top:28px; }
+  h1 { margin:0 0 4px; font-size:24px; }
+  header p, footer { color:var(--mut); margin:0; }
+  main { display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 520px), 1fr)); gap:16px; padding-top:20px; padding-bottom:20px; }
+  figure { margin:0; background:var(--card); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  iframe { display:block; width:100%; aspect-ratio:16/10; border:0; }
+  figcaption { display:flex; flex-wrap:wrap; gap:4px 12px; align-items:baseline; padding:10px 12px; }
+  figcaption b { font-size:15px; }
+  figcaption span { color:var(--mut); font-size:13px; flex:1 1 200px; }
+  figcaption a { color:inherit; font-size:13px; }
+  footer { padding-bottom:28px; font-size:13px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Type Garden variants</h1>
+  <p>Six variants of one effect: vines grow out of the letters, weave, bloom, then wither. "full" opens it alone; "type" lets you type.</p>
+</header>
+<main id="grid"></main>
+<footer>Technique after Type Garden by Akshat Agarwal (x.com/art_akshat) — personal / portfolio use only.</footer>
+<script>
+  const V = [
+    ['blue-rose-noir', 'Blue rose · flat · noir', 'midnight — Playfair, blue roses on near-black'],
+    ['poppy-paper', 'Poppy · papercut · cream', 'poppy field — red poppies, hard paper shadows'],
+    ['ink-sketch', 'Daisy · ink · line art', 'sketch — black outlines, navy vines'],
+    ['pixel-tulip', 'Tulip · pixel · 8-bit', 'level up — hard palette, low-res canvas'],
+    ['neon-orchid', 'Orchid · neon · custom bloom', 'nightbloom — glowing wire on deep violet'],
+    ['watercolor-sunflower', 'Sunflower · watercolor · custom bloom', 'sunny — translucent washes on cream'],
+  ];
+  const grid = document.getElementById('grid');
+  V.forEach(([dir, title, note]) => {
+    const f = document.createElement('figure');
+    f.innerHTML = '<iframe loading="lazy" title="' + title + '" src="' + dir + '/index.html"></iframe>' +
+      '<figcaption><b>' + title + '</b><span>' + note + '</span>' +
+      '<a href="' + dir + '/index.html">full</a><a href="' + dir + '/index.html?type">type</a></figcaption>';
+    grid.appendChild(f);
+  });
+</script>
+</body>
+</html>

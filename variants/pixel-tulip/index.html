@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Type Garden</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+</style>
+</head>
+<body>
+<canvas id="garden" aria-label="TEXT HERE"></canvas>
+<script src="typegarden.js"></script>
+<script>
+  // ───────────── CONFIG — edit this block only ─────────────
+  const CONFIG = {
+    text: 'level up',
+    font: 'JBMonoBold',
+    fontUrl: 'fonts/JetBrainsMonoNerdFont-Bold.ttf',
+    weight: 700,
+    bloom: 'tulip',
+    style: 'pixel',
+    palette: {
+      bg:     '#1a1c2c',
+      text:   '#f4f4f4',
+      stem:   '#38b764',
+      leaf:   '#a7f070',
+      bloom:  '#ff3d7f',
+      bloom2: '#ffcd75',
+      line:   '#b13e53',
+    },
+    seed: 7,
+    density: 1,
+    bloomChance: 0.5,
+    bloomScale: 1,
+    // blooms: { mine(P, x, y, R, rot, e, a, C, o) { ... } },   // custom species, then bloom:'mine'
+  };
+  // ──────────────────────────────────────────────────────
+  if (new URLSearchParams(location.search).has('type')) { CONFIG.mode = 'type'; }   // ?type → keyboard mode
+  document.title = CONFIG.text + ' — type garden';
+  document.getElementById('garden').setAttribute('aria-label', CONFIG.text);
+  document.body.style.background = CONFIG.palette.bg;
+  TypeGarden.mount(document.getElementById('garden'), CONFIG);
+</script>
+</body>
+</html>

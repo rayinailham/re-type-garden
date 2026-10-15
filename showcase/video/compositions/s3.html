@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><link rel="stylesheet" href="../assets/base.css" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/base.css" />
+      <style>#s3 { position: absolute; inset: 0; }</style>
+      <div id="s3" data-composition-id="s3" data-width="1080" data-height="1080">
+        <div class="scene s3">
+        <div class="head" id="s3-h">
+          <p class="mono" id="s3-k">Poster mode · 1:1 loop · 30 fps</p>
+          <h2 class="serif" id="s3-t">Every preset, frame for frame.</h2>
+        </div>
+        <div class="panel" id="s3-pa"><video id="v-poster-orig" src="assets/poster-orig.mp4" muted playsinline data-start="0" data-duration="11.5" data-media-start="4.2"></video></div>
+        <div class="panel" id="s3-pb"><video id="v-poster-rebuild" src="assets/poster-rebuild.mp4" muted playsinline data-start="0" data-duration="11.5" data-media-start="4.2"></video></div>
+        <p class="tag mono" id="s3-ta"><span class="dot" style="background:var(--mute)"></span>Original</p>
+        <p class="tag mono" id="s3-tb"><span class="dot" style="background:var(--rose)"></span>Rebuild</p>
+        <div class="cap mono"><div id="c5">grow &amp; wither → visitor → midnight</div></div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          const E = "power3.out";
+          tl.fromTo("#s3-k", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, 0.1);
+          tl.fromTo("#s3-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: E }, 0.25);
+          tl.fromTo("#s3-pa", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.6, ease: E }, 0.4);
+          tl.fromTo("#s3-pb", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.6, ease: E }, 0.4);
+          tl.fromTo(["#s3-ta", "#s3-tb", "#c5"], { opacity: 0 }, { opacity: 1, duration: 0.4, stagger: 0.1 }, 0.8);
+          tl.to(["#s3-h", "#s3-pa", "#s3-pb", "#s3-ta", "#s3-tb", "#c5"], { opacity: 0, duration: 0.35 }, 11.1);
+          window.__timelines["s3"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
